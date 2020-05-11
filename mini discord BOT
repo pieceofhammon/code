@@ -1,0 +1,88 @@
+import discord
+import random
+from discord.ext import commands
+from discord.ext import tasks
+from itertools import cycle
+
+client = commands.Bot(command_prefix='.') #Префикс который нужно добавлять к каждой команде
+@client.event
+async def on_ready():
+    print('Logged in as')
+    print(client.user.name)
+    print(client.user.id)
+    print('------')
+bot_status = 'Жрет мою оперативную память'
+@client.command()
+async def status(ctx):
+    await ctx.send(bot_status)
+
+
+@client.command()       #показует что у клиента есть эта команда и что Боту делать если я ее введу
+async def batya(ctx):        #показует что если я напишу .batya то функция :
+        await ctx.send(' Уходил, но обещал вернуться)) ')   #Напишет то , что написано в скобках 
+#Шуточная команда которая никого не хочет обидеть)
+@client.command()
+async def ktoya(ctx):
+    await ctx.send(' Как пелось в одной песне: ТЫ ДАЛБАЕБ!( я любя ) ')
+ 
+
+#Тоже шуточная команда   
+@client.command()
+async def spam10(ctx):
+    await ctx.send('Spam'*3 )
+    await ctx.send('Spam'*3 )
+
+                                   
+@client.command()
+async def clear5(ctx, amount=5):
+    await ctx.channel.purge(limit=amount)#
+#Эта функция нужна для очистки последних 5 сообщений от кого-либо
+
+
+@client.command()
+async def kick(ctx, member : discord.Member, *, reason=None):
+    await member.kick(reason=reason)
+    await ctx.send('User was kicked!')
+#этой коммандой можно кикнуть любого учасника группы
+
+
+@client.command()
+async def ban(ctx, member : discord.Member, *, reason=None):
+    await member.ban(reason=reason)
+    await ctx.send('User was banned!{user.name}')
+#также можно забанить любого пользователя 
+
+
+@client.command()
+async def unban(ctx, *, member):
+    banned_users = await ctx.guild.bans()
+    member_name, member_discriminator = member.split('#')
+
+    for ban_entry in banned_users:
+        user = ban_entry.user
+
+        if(user.name, user, discriminator) == (member_name, member_discriminator):
+            await ctx.guild.unban(user)
+            await ctx.send(' Unbanned user! {user.name}')
+            return
+
+
+@client.command()
+async def name(ctx):
+    await ctx.send('Здесь может быть ваше имя')
+
+
+a = random.randint(1,99)
+@client.command()
+async def num(ctx):
+    await ctx.send('Рандомное число от 1 до 99 это: '+ a)
+
+
+@client.command()
+async def clear10(ctx, amount=10):
+    await ctx.channel.purge(limit=amount)
+
+
+#Эта все команды, необходимые для разбана пользователя! 
+client.run('Njk3NzUyODA0Njc2MzM3NzA3.Xo72_w.mECE8M4rDN2F48aBshgM5W6RjKo')
+# ЗАПУСК БОТА ПО ТОКЕНУ НА СЕРВЕРЕ

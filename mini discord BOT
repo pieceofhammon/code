@@ -84,5 +84,5 @@ async def clear10(ctx, amount=10):
 
 
 #Эта все команды, необходимые для разбана пользователя! 
-client.run('Njk3NzUyODA0Njc2MzM3NzA3.Xo72_w.mECE8M4rDN2F48aBshgM5W6RjKo')
+client.run('TOKEN')
 # ЗАПУСК БОТА ПО ТОКЕНУ НА СЕРВЕРЕ
